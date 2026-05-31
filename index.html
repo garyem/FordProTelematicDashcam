@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Medequip Driver Guide — Ford Pro Telematics Dashcam</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f5f5; color: #1a1a1a;
+    min-height: 100vh; display: flex; justify-content: center; padding: 1rem 0 2rem;
+  }
+  .page { width: 100%; max-width: 480px; background: #ffffff; min-height: 100vh; }
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.25rem; border-bottom: 0.5px solid #e0e0e0;
+    margin-bottom: 1.5rem; background: #fff;
+  }
+  .header-title { font-size: 15px; font-weight: 500; color: #1a1a1a; }
+  .header-sub { font-size: 12px; color: #666; margin-top: 2px; }
+  .header-img {
+    height: 52px; width: auto; object-fit: contain; flex-shrink: 0;
+    mix-blend-mode: multiply;
+  }
+  .hero {
+    margin: 0 1.25rem 1.5rem; background: #E6F1FB;
+    border-radius: 12px; padding: 1.25rem; border: 0.5px solid #B5D4F4;
+  }
+  .hero-eyebrow { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #185FA5; margin-bottom: 0.5rem; }
+  .hero-heading { font-size: 20px; font-weight: 500; color: #0C447C; line-height: 1.35; margin-bottom: 0.75rem; }
+  .hero-body { font-size: 14px; color: #185FA5; line-height: 1.6; }
+  .section-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #888;
+    padding: 0 1.25rem; margin-bottom: 0.75rem; margin-top: 1.5rem;
+  }
+  .card {
+    background: #fff; border: 0.5px solid #e0e0e0; border-radius: 12px;
+    padding: 1rem 1.25rem; margin: 0 1.25rem 0.75rem;
+    cursor: pointer; transition: border-color 0.15s;
+  }
+  .card:hover { border-color: #bbb; }
+  .card-header { display: flex; align-items: center; gap: 10px; }
+  .card-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 18px;
+  }
+  .card-icon.blue { background: #E6F1FB; color: #185FA5; }
+  .card-icon.green { background: #EAF3DE; color: #3B6D11; }
+  .card-icon.amber { background: #FAEEDA; color: #854F0B; }
+  .card-icon.coral { background: #FAECE7; color: #993C1D; }
+  .card-icon.teal { background: #E1F5EE; color: #0F6E56; }
+  .card-text { flex: 1; }
+  .card-title { font-size: 15px; font-weight: 500; color: #1a1a1a; }
+  .card-sub { font-size: 12px; color: #666; margin-top: 2px; }
+  .card-chevron { font-size: 16px; color: #888; transition: transform 0.2s; }
+  .card-body { display: none; margin-top: 1rem; padding-top: 1rem; border-top: 0.5px solid #e0e0e0; }
+  .card.open .card-body { display: block; }
+  .card.open .card-chevron { transform: rotate(180deg); }
+  .card-body p { font-size: 14px; color: #1a1a1a; line-height: 1.65; margin-bottom: 0.75rem; }
+  .card-body p:last-child { margin-bottom: 0; }
+  .item-list { list-style: none; }
+  .item-list li {
+    font-size: 14px; color: #1a1a1a; line-height: 1.55; padding: 6px 0;
+    border-bottom: 0.5px solid #e0e0e0; display: flex; align-items: flex-start; gap: 8px;
+  }
+  .item-list li:last-child { border-bottom: none; }
+  .item-list li i { margin-top: 2px; flex-shrink: 0; color: #888; font-size: 15px; }
+  .callout { margin: 0 1.25rem 0.75rem; border-radius: 12px; padding: 1rem 1.25rem; font-size: 14px; line-height: 1.6; }
+  .callout.info { background: #E6F1FB; color: #185FA5; border: 0.5px solid #B5D4F4; }
+  .callout.success { background: #EAF3DE; color: #3B6D11; border: 0.5px solid #C0DD97; }
+  .callout.warn { background: #E6F1FB; color: #185FA5; border: 0.5px solid #B5D4F4; }
+  .callout-title { font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+  .callout-title i { font-size: 16px; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 100px; margin-right: 4px; margin-bottom: 4px; }
+  .badge.blue { background: #E6F1FB; color: #185FA5; }
+  .badge.amber { background: #FAEEDA; color: #854F0B; }
+  .dos-donts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 1.25rem 0.75rem; }
+  .dos-donts .block { border-radius: 12px; padding: 0.875rem 1rem; border: 0.5px solid #e0e0e0; }
+  .dos-donts .block.do { background: #EAF3DE; }
+  .dos-donts .block.dont { background: #E6F1FB; border-color: #B5D4F4; }
+  .dos-donts .block-title { font-size: 12px; font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
+  .dos-donts .block.do .block-title { color: #3B6D11; }
+  .dos-donts .block.dont .block-title { color: #0C447C; }
+  .dos-donts ul { list-style: none; }
+  .dos-donts ul li { font-size: 12px; line-height: 1.5; padding: 3px 0; }
+  .dos-donts .block.do ul li { color: #3B6D11; }
+  .dos-donts .block.dont ul li { color: #185FA5; }
+  .inner-note { margin-top: 0.75rem; padding: 0.75rem; background: #E6F1FB; border-radius: 8px; color: #185FA5; font-size: 13px; line-height: 1.55; }
+  .copyright { margin: 1.5rem 1.25rem 0; padding: 1rem 1.25rem; background: #f5f5f5; border-radius: 12px; border: 0.5px solid #e0e0e0; text-align: center; font-size: 12px; color: #888; }
+  @media (max-width: 480px) { body { padding: 0; } .page { min-height: 100dvh; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div>
+      <div class="header-title">Driver guide</div>
+      <div class="header-sub">Ford Pro Telematics dashcam</div>
+    </div>
+    <img class="header-img" src="dashcam.png" alt="Dashcam" />
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">For all driver technicians</div>
+    <div class="hero-heading">Your vehicle has a dashcam system. Here's what it does.</div>
+    <div class="hero-body">This guide explains clearly and simply what the Ford Pro Telematics dashcam captures, how it works, and what it means for you day to day.</div>
+  </div>
+
+  <div class="section-label">What it records</div>
+
+  <div class="card" onclick="toggle(this)">
+    <div class="card-header">
+      <div class="card-icon blue"><i class="ti ti-video"></i></div>
+      <div class="card-text"><div class="card-title">The road ahead</div><div class="card-sub">HD forward-facing camera</div></div>
+      <i class="ti ti-chevron-down card-chevron"></i>
+    </div>
+    <div class="card-body">
+      <p>A forward-facing 1080p HD camera records the road at all times. The lens covers around 96° of view.</p>
+      <ul class="item-list">
+        <li><i class="ti ti-circle-dot"></i>Traffic, junctions and pedestrians</li>
+        <li><i class="ti ti-circle-dot"></i>Collisions and near misses</li>
+        <li><i class="ti ti-circle-dot"></i>Lane movement and other vehicles</li>
+        <li><i class="ti ti-circle-dot"></i>Harsh braking incidents</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggle(this)">
+    <div class="card-header">
+      <div class="card-icon coral"><i class="ti ti-user"></i></div>
+      <div class="card-text"><div class="card-title">Inside the cab</div><div class="card-sub">Inward-facing wide-angle camera</div></div>
+      <i class="ti ti-chevron-down card-chevron"></i>
+    </div>
+    <div class="card-body">
+      <p>The system also includes an inward-facing camera with around 144° cabin coverage. This is the part many drivers do not expect.</p>
+      <ul class="item-list">
+        <li><i class="ti ti-circle-dot"></i>Driver posture and attention</li>
+        <li><i class="ti ti-circle-dot"></i>Seatbelt use</li>
+        <li><i class="ti ti-circle-dot"></i>Phone usage detection (AI)</li>
+        <li><i class="ti ti-circle-dot"></i>Eating, drinking or smoking</li>
+        <li><i class="ti ti-circle-dot"></i>Signs of fatigue or distraction</li>
+      </ul>
+      <div class="inner-note">The inward camera has infrared — so it records in low light and at night too.</div>
+    </div>
+  </div>
+
+  <div class="section-label">How it monitors driving</div>
+
+  <div class="card" onclick="toggle(this)">
+    <div class="card-header">
+      <div class="card-icon amber"><i class="ti ti-gauge"></i></div>
+      <div class="card-text"><div class="card-title">Driving behaviour</div><div class="card-sub">Telematics data, not just video</div></div>
+      <i class="ti ti-chevron-down card-chevron"></i>
+    </div>
+    <div class="card-body">
+      <p>The system connects to your vehicle's own data. That means it does not rely on video alone.</p>
+      <div style="margin-top:0.5rem;">
+        <span class="badge blue">Harsh braking</span><span class="badge blue">Speeding</span>
+        <span class="badge blue">Sharp cornering</span><span class="badge blue">Harsh acceleration</span>
+        <span class="badge blue">Excessive idling</span><span class="badge blue">Lane movement</span>
+        <span class="badge amber">Collision detection</span><span class="badge amber">Airbag trigger</span>
+      </div>
+      <p style="margin-top:0.75rem;">If any of these happen, the system may <strong style="font-weight:500;">automatically save video</strong> from just before and after the event.</p>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggle(this)">
+    <div class="card-header">
+      <div class="card-icon teal"><i class="ti ti-map-pin"></i></div>
+      <div class="card-text"><div class="card-title">Location and route tracking</div><div class="card-sub">GPS built in</div></div>
+      <i class="ti ti-chevron-down card-chevron"></i>
+    </div>
+    <div class="card-body">
+      <p>The telematics platform includes GPS tracking. Fleet managers can see:</p>
+      <ul class="item-list">
+        <li><i class="ti ti-circle-dot"></i>Vehicle location at any time</li>
+        <li><i class="ti ti-circle-dot"></i>Route history and journey playback</li>
+        <li><i class="ti ti-circle-dot"></i>Stop durations and time on site</li>
+        <li><i class="ti ti-circle-dot"></i>Arrival and departure times</li>
+        <li><i class="ti ti-circle-dot"></i>Where speeding events happened</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggle(this)">
+    <div class="card-header">
+      <div class="card-icon green"><i class="ti ti-brain"></i></div>
+      <div class="card-text"><div class="card-title">AI driver analysis</div><div class="card-sub">Automated, real-time</div></div>
+      <i class="ti ti-chevron-down card-chevron"></i>
+    </div>
+    <div class="card-body">
+      <p>The system uses AI to analyse driver behaviour automatically. You do not need to do anything to trigger it — it works in the background.</p>
+      <ul class="item-list">
+        <li><i class="ti ti-circle-dot"></i>Detects phone use, fatigue, distraction</li>
+        <li><i class="ti ti-circle-dot"></i>Can generate driver safety scores</li>
+        <li><i class="ti ti-circle-dot"></i>May give in-cab audio alerts in real time</li>
+        <li><i class="ti ti-circle-dot"></i>Flags events for manager review</li>
+      </ul>
+      <p style="margin-top:0.75rem; font-size:13px; color:#666;">Managers do not watch live footage all day. The AI flags events automatically, and managers can then review those specific clips.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Your event button</div>
+
+  <div class="callout info">
+    <div class="callout-title"><i class="ti ti-hand-finger"></i> The manual event button</div>
+    Your vehicle has a button you can press yourself to mark and protect footage. Use it after an incident, near miss, or to record aggressive driving by others. It helps protect you.
+  </div>
+
+  <div class="section-label">What it does and doesn't do</div>
+
+  <div class="dos-donts">
+    <div class="block do">
+      <div class="block-title"><i class="ti ti-check"></i> It does</div>
+      <ul>
+        <li>Record road &amp; cab video</li>
+        <li>Track location &amp; route</li>
+        <li>Detect driving events</li>
+        <li>Flag incidents to managers</li>
+        <li>Record in the dark</li>
+      </ul>
+    </div>
+    <div class="block dont">
+      <div class="block-title"><i class="ti ti-x"></i> It doesn't</div>
+      <ul>
+        <li>Read your phone contents</li>
+        <li>Record audio 24/7</li>
+        <li>Livestream every moment</li>
+        <li>Listen like a microphone</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-label">Reasons why this system is used</div>
+
+  <div class="callout success">
+    <div class="callout-title"><i class="ti ti-shield-check"></i> This protects you too</div>
+    If someone makes a false claim against you, this footage is your evidence. It protects you from unfair blame, disputes with other drivers, and insurance issues.
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-title"><i class="ti ti-info-circle"></i> Good to know</div>
+    Footage can also be used in disciplinary investigations. Drive as you would if you knew someone was watching — because in some cases, they can be.
+  </div>
+
+  <div class="card" onclick="toggle(this)">
+    <div class="card-header">
+      <div class="card-icon blue"><i class="ti ti-server"></i></div>
+      <div class="card-text"><div class="card-title">Data and storage</div><div class="card-sub">How footage is kept</div></div>
+      <i class="ti ti-chevron-down card-chevron"></i>
+    </div>
+    <div class="card-body">
+      <ul class="item-list">
+        <li><i class="ti ti-circle-dot"></i>Up to 128GB stored locally on the device</li>
+        <li><i class="ti ti-circle-dot"></i>Normal footage overwrites after a period</li>
+        <li><i class="ti ti-circle-dot"></i>Flagged events are kept for longer</li>
+        <li><i class="ti ti-circle-dot"></i>Important clips may upload to secure cloud</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="copyright" id="copyright"></div>
+
+</div>
+<script>
+function toggle(card) {
+  const wasOpen = card.classList.contains('open');
+  document.querySelectorAll('.card.open').forEach(c => c.classList.remove('open'));
+  if (!wasOpen) card.classList.add('open');
+}
+const d = new Date();
+const dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+document.getElementById('copyright').innerHTML = '&copy; <strong><em>GaryM</em></strong> ' + dateStr;
+</script>
+</body>
+</html>
